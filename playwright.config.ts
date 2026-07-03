@@ -59,25 +59,25 @@ export default defineConfig({
       dependencies: ['setup'],
     },
 
-    {
-      name: 'firefox',
-      testIgnore: '**/auth.setup.spec.ts',
-      use: {
-        ...devices['Desktop Firefox'],
-        storageState: path.resolve(__dirname, '.auth/user.json'),
-      },
-      dependencies: ['setup'],
-    },
+    // {
+    //   name: 'firefox',
+    //   testIgnore: '**/auth.setup.spec.ts',
+    //   use: {
+    //     ...devices['Desktop Firefox'],
+    //     storageState: path.resolve(__dirname, '.auth/user.json'),
+    //   },
+    //   dependencies: ['setup'],
+    // },
 
-    {
-      name: 'webkit',
-      testIgnore: '**/auth.setup.spec.ts',
-      use: {
-        ...devices['Desktop Safari'],
-        storageState: path.resolve(__dirname, '.auth/user.json'),
-      },
-      dependencies: ['setup'],
-    },
+    // {
+    //   name: 'webkit',
+    //   testIgnore: '**/auth.setup.spec.ts',
+    //   use: {
+    //     ...devices['Desktop Safari'],
+    //     storageState: path.resolve(__dirname, '.auth/user.json'),
+    //   },
+    //   dependencies: ['setup'],
+    // },
 
     /* API Tests */
     {
