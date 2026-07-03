@@ -1,0 +1,50 @@
+[    2223ms] [LOG]  @ https://static-id.testsigma.com/vite/ui/production/f08d373/assets/index-CPl8SiBt.js:48
+[    2268ms] Uncaught (in promise) Cannot read properties of undefined (reading 'hasInsightsMetric')
+    at resolve (https://dev.visualwebsiteoptimizer.com/cdn/edrv/worker-cb8da8ab3fc814452c5f99e83cfd2882.br.js:0:3666)
+    at onMessage (https://dev.visualwebsiteoptimizer.com/cdn/edrv/worker-cb8da8ab3fc814452c5f99e83cfd2882.br.js:0:32586)
+[    2271ms] [WARNING] Failed to decode downloaded font: https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap @ https://id.testsigma.com/ui/login?redirectTo=https://app.testsigma.com/ui/:0
+[    2271ms] [WARNING] OTS parsing error: invalid sfntVersion: 791289955 @ https://id.testsigma.com/ui/login?redirectTo=https://app.testsigma.com/ui/:0
+[    2271ms] [WARNING] Failed to decode downloaded font: https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap @ https://id.testsigma.com/ui/login?redirectTo=https://app.testsigma.com/ui/:0
+[    2271ms] [WARNING] OTS parsing error: invalid sfntVersion: 791289955 @ https://id.testsigma.com/ui/login?redirectTo=https://app.testsigma.com/ui/:0
+[    2271ms] [WARNING] Failed to decode downloaded font: https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap @ https://id.testsigma.com/ui/login?redirectTo=https://app.testsigma.com/ui/:0
+[    2271ms] [WARNING] OTS parsing error: invalid sfntVersion: 791289955 @ https://id.testsigma.com/ui/login?redirectTo=https://app.testsigma.com/ui/:0
+[    2353ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://id.testsigma.com/ui/login?redirectTo=https://app.testsigma.com/ui/:0
+[ 1230198ms] [WARNING] Failed to decode downloaded font: https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap @ https://id.testsigma.com/ui/login:0
+[ 1230198ms] [WARNING] OTS parsing error: invalid sfntVersion: 791289955 @ https://id.testsigma.com/ui/login:0
+[ 1230208ms] [WARNING] Failed to decode downloaded font: https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap @ https://id.testsigma.com/ui/login:0
+[ 1230208ms] [WARNING] OTS parsing error: invalid sfntVersion: 791289955 @ https://id.testsigma.com/ui/login:0
+[ 1230247ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://id.testsigma.com/ui/login:0
+[ 1230344ms] [WARNING] Failed to decode downloaded font: https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap @ https://id.testsigma.com/ui/login:0
+[ 1230344ms] [WARNING] OTS parsing error: invalid sfntVersion: 791289955 @ https://id.testsigma.com/ui/login:0
+[ 1260949ms] [WARNING] Failed to decode downloaded font: https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap @ https://id.testsigma.com/ui/login:0
+[ 1260949ms] [WARNING] OTS parsing error: invalid sfntVersion: 791289955 @ https://id.testsigma.com/ui/login:0
+[ 1260984ms] [WARNING] Failed to decode downloaded font: https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap @ https://id.testsigma.com/ui/login:0
+[ 1260984ms] [WARNING] OTS parsing error: invalid sfntVersion: 791289955 @ https://id.testsigma.com/ui/login:0
+[ 1261027ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://id.testsigma.com/ui/login:0
+[ 1261063ms] [WARNING] Failed to decode downloaded font: https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap @ https://id.testsigma.com/ui/login:0
+[ 1261063ms] [WARNING] OTS parsing error: invalid sfntVersion: 791289955 @ https://id.testsigma.com/ui/login:0
+[ 1261469ms] [INFO] Loading the script 'https://www.gstatic.com/recaptcha/releases/TnA7HacJFoBWt9hnlunBlYfK/recaptcha__en.js' violates the following Content Security Policy directive: "script-src 'unsafe-inline'". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The policy is report-only, so the violation has been logged but no further action has been taken. @ https://recaptcha.net/recaptcha/api2/bframe?hl=en&v=TnA7HacJFoBWt9hnlunBlYfK&k=6LcL08cZAAAAAAn21PBn75R1qLquLlbx1ZB0ZIFd&bft=0dAFcWeA65UaHil0LC5px_e0-SUX9BrswIQFUwQWkUdm-fJPRUAaJCL1B4QOvxw3bvSV5ElNuSkENsZ7ACkZokCrAjgYYsn5qTpA:0
+[ 1263493ms] [ERROR] Failed to load resource: the server responded with a status of 401 () @ https://id.testsigma.com/login:0
+[ 1284783ms] [WARNING] Failed to decode downloaded font: https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap @ https://id.testsigma.com/ui/login:0
+[ 1284783ms] [WARNING] OTS parsing error: invalid sfntVersion: 791289955 @ https://id.testsigma.com/ui/login:0
+[ 1284834ms] [WARNING] Failed to decode downloaded font: https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap @ https://id.testsigma.com/ui/login:0
+[ 1284834ms] [WARNING] OTS parsing error: invalid sfntVersion: 791289955 @ https://id.testsigma.com/ui/login:0
+[ 1284878ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://id.testsigma.com/ui/login:0
+[ 1284892ms] [WARNING] Failed to decode downloaded font: https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap @ https://id.testsigma.com/ui/login:0
+[ 1284892ms] [WARNING] OTS parsing error: invalid sfntVersion: 791289955 @ https://id.testsigma.com/ui/login:0
+[ 1320829ms] [WARNING] Failed to decode downloaded font: https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap @ https://id.testsigma.com/ui/login:0
+[ 1320829ms] [WARNING] OTS parsing error: invalid sfntVersion: 791289955 @ https://id.testsigma.com/ui/login:0
+[ 1320867ms] [WARNING] Failed to decode downloaded font: https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap @ https://id.testsigma.com/ui/login:0
+[ 1320867ms] [WARNING] OTS parsing error: invalid sfntVersion: 791289955 @ https://id.testsigma.com/ui/login:0
+[ 1320922ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://id.testsigma.com/ui/login:0
+[ 1320935ms] [WARNING] Failed to decode downloaded font: https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap @ https://id.testsigma.com/ui/login:0
+[ 1320935ms] [WARNING] OTS parsing error: invalid sfntVersion: 791289955 @ https://id.testsigma.com/ui/login:0
+[ 1323106ms] [ERROR] Failed to load resource: the server responded with a status of 401 () @ https://id.testsigma.com/login:0
+[ 1357878ms] [WARNING] Failed to decode downloaded font: https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap @ https://id.testsigma.com/ui/login:0
+[ 1357878ms] [WARNING] OTS parsing error: invalid sfntVersion: 791289955 @ https://id.testsigma.com/ui/login:0
+[ 1357937ms] [WARNING] Failed to decode downloaded font: https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap @ https://id.testsigma.com/ui/login:0
+[ 1357937ms] [WARNING] OTS parsing error: invalid sfntVersion: 791289955 @ https://id.testsigma.com/ui/login:0
+[ 1357973ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://id.testsigma.com/ui/login:0
+[ 1358002ms] [WARNING] Failed to decode downloaded font: https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap @ https://id.testsigma.com/ui/login:0
+[ 1358002ms] [WARNING] OTS parsing error: invalid sfntVersion: 791289955 @ https://id.testsigma.com/ui/login:0
+[ 1360186ms] [ERROR] Failed to load resource: the server responded with a status of 401 () @ https://id.testsigma.com/login:0

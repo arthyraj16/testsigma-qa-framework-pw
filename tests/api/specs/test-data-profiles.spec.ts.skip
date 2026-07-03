@@ -1,0 +1,98 @@
+/**
+ * Test Data Profiles API Test Suite
+ * Endpoints: GET/POST/PUT /test_data_profiles, /test_data_profiles/{id}
+ * Base URL: https://app.testsigma.com/api/v1/
+ */
+
+import { test, expect } from '@playwright/test';
+import { TestDataProfilesClient } from '../clients/test-data-profiles.client';
+
+test.describe('@api @regression Test Data Profiles API', () => {
+  let client: TestDataProfilesClient;
+
+  test.beforeEach(async ({ request }) => {
+    client = new TestDataProfilesClient(request);
+  });
+
+  test('should retrieve list of test data profiles with valid status and schema', async () => {
+    const result = await client.list();
+
+    expect(result.status).toBe(200);
+    expect(result.data).toBeDefined();
+    expect(Array.isArray(result.data)).toBe(true);
+
+    if (result.data.length > 0) {
+      const profile = result.data[0];
+      expect(profile).toHaveProperty('id');
+      expect(profile).toHaveProperty('name');
+    }
+  });
+
+  test('should create a new test data profile and verify with GET', async () => {
+    const profileName = `profile-test-${Date.now()}`;
+    const payload = {
+      name: profileName,
+      description: 'Test data profile for automation',
+      data: {
+        username: 'testuser',
+        email: 'test@example.com',
+        password: 'TempPass123!',
+      },
+    };
+
+    const createResult = await client.create(payload);
+    expect(createResult.status).toBe(201);
+    expect(createResult.data).toBeDefined();
+    expect(createResult.data.id).toBeDefined();
+
+    const profileId = createResult.data.id;
+
+    const getResult = await client.get(profileId);
+    expect(getResult.status).toBe(200);
+    expect(getResult.data.name).toBe(profileName);
+    expect(getResult.data.data).toEqual(payload.data);
+  });
+
+  test('should update a test data profile and verify changes persist', async () => {
+    const profileName = `profile-update-${Date.now()}`;
+    const createPayload = {
+      name: profileName,
+      description: 'Original description',
+      data: { key1: 'value1' },
+    };
+
+    const createResult = await client.create(createPayload);
+    const profileId = createResult.data.id;
+
+    const updateResult = await client.update(profileId, {
+      description: 'Updated description',
+      data: { key1: 'updated_value1', key2: 'value2' },
+    });
+    expect(updateResult.status).toBe(200);
+
+    const getResult = await client.get(profileId);
+    expect(getResult.status).toBe(200);
+    expect(getResult.data.description).toBe('Updated description');
+    expect(getResult.data.data.key1).toBe('updated_value1');
+  });
+
+  test('should return 400 when creating profile with missing required fields', async () => {
+    const invalidPayload = { description: 'Missing name' };
+    const result = await client.create(invalidPayload as any);
+    expect(result.status).toBe(400);
+  });
+
+  test('should return 401 when Authorization header is missing', async ({
+    request,
+  }) => {
+    const response = await request.get(
+      'https://app.testsigma.com/api/v1/test_data_profiles'
+    );
+    expect(response.status()).toBe(401);
+  });
+
+  test('should return 404 when getting non-existent profile', async () => {
+    const result = await client.get('999999999');
+    expect(result.status).toBe(404);
+  });
+});

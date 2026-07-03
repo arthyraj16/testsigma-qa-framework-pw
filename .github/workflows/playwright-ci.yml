@@ -1,0 +1,143 @@
+name: Playwright Tests CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+  # Uncomment to enable nightly full regression runs
+  # schedule:
+  #   - cron: '0 2 * * *'  # 2 AM UTC daily
+
+jobs:
+  web-tests:
+    name: Web Tests
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # Run web tests across multiple browsers
+        browser: [chromium, firefox, webkit]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Run web tests (${{ matrix.browser }})
+        run: npx playwright test --project=${{ matrix.browser }}
+        env:
+          CI: true
+          TESTSIGMA_API_KEY: ${{ secrets.TESTSIGMA_CICD_API_KEY }}
+
+      # Upload Allure raw results for later merging
+      - name: Upload Allure results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results-web-${{ matrix.browser }}
+          path: allure-results/
+          retention-days: 5
+
+  api-tests:
+    name: API Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Run API tests
+        run: npx playwright test --project=api
+        env:
+          CI: true
+          TESTSIGMA_API_KEY: ${{ secrets.TESTSIGMA_CICD_API_KEY }}
+
+      # Upload Allure raw results for later merging
+      - name: Upload Allure results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results-api
+          path: allure-results/
+          retention-days: 5
+
+  report:
+    name: Merge Allure Reports
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [web-tests, api-tests]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install allure CLI
+        run: npm install -g allure-commandline
+
+      - name: Download all Allure results
+        uses: actions/download-artifact@v4
+        with:
+          path: allure-results-all/
+          pattern: allure-results-*
+
+      - name: Merge Allure results
+        run: |
+          mkdir -p allure-results-merged
+          find allure-results-all -name 'allure-results-*' -type d -exec sh -c '
+            for dir in "$@"; do
+              echo "Processing: $dir"
+              cp -r "$dir"/* allure-results-merged/ 2>/dev/null || true
+            done
+          ' sh {} +
+          echo "Merged results ready for report generation"
+
+      - name: Generate Allure Report
+        run: allure generate allure-results-merged -o allure-report --clean
+
+      - name: Upload combined Allure report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: allure-report/
+          retention-days: 30
+
+      - name: Test Summary
+        if: always()
+        run: |
+          echo "## Test Results Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ -f "allure-results-merged/summary.json" ]; then
+            echo "✅ Report generated successfully" >> $GITHUB_STEP_SUMMARY
+            echo "📊 Combined Allure report available in artifacts" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "⚠️ No test results found. Check if tests ran correctly." >> $GITHUB_STEP_SUMMARY
+          fi
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Artifacts:**" >> $GITHUB_STEP_SUMMARY
+          echo "- **allure-report**: Combined HTML report (download and open index.html)" >> $GITHUB_STEP_SUMMARY
+          echo "- **allure-results-web-*** / **allure-results-api**: Raw test results per suite" >> $GITHUB_STEP_SUMMARY

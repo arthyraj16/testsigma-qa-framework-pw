@@ -1,0 +1,27 @@
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+
+# Local env and auth state
+.env
+.auth/
+
+# OS and IDE
+.DS_Store
+.vscode/mcp.json
+.playwright-mcp/
+
+# Temporary files
+test-results.json
+testsigma-login-page-snapshot.md
+text\ context/
+tests/web/AI/
+tests/web/TrialCheck/
+QUICK_START.md
+PROJECT_MANAGEMENT_TESTS.md
+TEST_GENERATION_SUMMARY.md
+README_TESTS.md

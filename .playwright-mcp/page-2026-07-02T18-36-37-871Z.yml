@@ -1,0 +1,44 @@
+- main [ref=f1e2]:
+  - main [ref=f1e3]:
+    - generic [ref=f1e4]:
+      - generic [ref=f1e5]:
+        - generic [ref=f1e6]: Smart Test automation for Agile Teams.
+        - generic [ref=f1e7]: Copyright © Testsigma Technologies Inc. All Rights Reserved.
+      - generic [ref=f1e8]:
+        - img "Testsigma logo" [ref=f1e9]
+        - heading "Sign in" [level=1] [ref=f1e10]
+        - generic [ref=f1e11]:
+          - generic [ref=f1e12]:
+            - generic [ref=f1e13]: Work email*
+            - textbox "name@company.com" [active] [ref=f1e15]
+          - generic [ref=f1e16]:
+            - generic [ref=f1e17]: Password*
+            - generic [ref=f1e18]:
+              - textbox "Enter Password" [ref=f1e19]
+              - img [ref=f1e22] [cursor=pointer]
+          - link "Forgot password?" [ref=f1e26] [cursor=pointer]:
+            - /url: /ui/forgot_password
+          - button "Sign in" [ref=f1e27] [cursor=pointer]
+        - generic [ref=f1e28]:
+          - paragraph [ref=f1e29]: OR
+          - generic [ref=f1e30]:
+            - link "Google" [ref=f1e31] [cursor=pointer]:
+              - /url: /oauth2/authorization/google?redirectTo=%2Fui%2Forg%3FredirectTo%3Dhttps%253A%252F%252Fapp.testsigma.com%252Fui%252F
+              - img [ref=f1e32]
+              - generic [ref=f1e33]: Google
+            - link "Azure Azure AD" [ref=f1e34] [cursor=pointer]:
+              - /url: /oauth2/authorization/azure?redirectTo=%2Fui%2Forg%3FredirectTo%3Dhttps%253A%252F%252Fapp.testsigma.com%252Fui%252F
+              - img "Azure" [ref=f1e35]
+              - generic [ref=f1e36]: Azure AD
+            - link "Github" [ref=f1e37] [cursor=pointer]:
+              - /url: /oauth2/authorization/github?redirectTo=%2Fui%2Forg%3FredirectTo%3Dhttps%253A%252F%252Fapp.testsigma.com%252Fui%252F
+              - img [ref=f1e38]
+              - generic [ref=f1e39]: Github
+          - link "SSO Sign in with SSO" [ref=f1e40] [cursor=pointer]:
+            - /url: /ui/sso_login?redirectTo=https://app.testsigma.com/ui/
+            - img "SSO" [ref=f1e41]
+            - text: Sign in with SSO
+          - paragraph [ref=f1e42]:
+            - text: Don't have an account?
+            - link "Join Free Today" [ref=f1e43] [cursor=pointer]:
+              - /url: https://testsigma.com/signup

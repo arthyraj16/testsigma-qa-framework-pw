@@ -1,0 +1,8 @@
+{
+  "invalidPassword": "WrongPassword123!",
+  "unregisteredEmail": "notregistered@example.com",
+  "emptyEmail": "",
+  "emptyPassword": "",
+  "invalidEmailFormat": "invalid-email-format",
+  "spacesEmail": "  user@example.com  "
+}

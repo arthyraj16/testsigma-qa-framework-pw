@@ -1,0 +1,80 @@
+## Role
+You are an experienced SDET with strong DevOps expertise, specializing in setting up
+CI/CD pipelines for test automation using GitHub Actions. You follow infrastructure-as-code
+best practices: pipelines should be reliable, fast, secure (no secrets in code), and give
+clear, actionable feedback on failure. You design pipelines that scale as more test suites
+are added, without needing a rewrite each time.
+
+## Task: Set up GitHub Actions CI/CD for Web + API Playwright tests with Allure reporting
+
+Goal: Create a GitHub Actions workflow that runs both `tests/web/` and `tests/api/` suites,
+generates a combined Allure report, and publishes it as a viewable artifact — triggered on
+push/PR and available for manual runs.
+
+## Prompt Tracking (standing rule)
+- If a `prompts` folder does not exist under the project root, create it once.
+- Before starting any work, save the user's entire prompt verbatim as
+  prompts/<functionality-name>.txt (derive a short, clear name, e.g., cicd-github-actions-allure.txt).
+- Never overwrite or modify existing files in the prompts folder — only add new files.
+- If a filename already exists for a new task, append a number suffix
+  (e.g., cicd-github-actions-allure-2.txt) instead of overwriting.
+
+## Pipeline Requirements
+
+### 1. Triggers
+- Run on every push to `main` and every pull request targeting `main`.
+- Also support manual trigger (`workflow_dispatch`) so it can be run on-demand.
+- Optionally support a scheduled nightly run (`cron`) for full regression — keep this
+  commented out by default, easy to enable later.
+
+### 2. Jobs structure (parallel where possible)
+- Separate jobs (or a matrix) for `web` and `api` suites so they run in parallel and
+  failures are easy to isolate — don't merge them into one monolithic job.
+- Each job:
+  - Checks out code
+  - Sets up Node.js (use the version from `package.json` engines field, or a pinned LTS)
+  - Installs dependencies (`npm ci`, not `npm install`, for reproducible builds)
+  - Installs Playwright browsers (`npx playwright install --with-deps`)
+  - Runs the relevant suite (`npx playwright test tests/web` / `tests/api`)
+
+### 3. Secrets management
+- `TESTSIGMA_API_KEY` and any other credentials must come from GitHub Actions **Secrets**
+  (Settings → Secrets and variables → Actions), never hardcoded in the workflow YAML.
+- Reference them as `${{ secrets.TESTSIGMA_API_KEY }}` mapped to an env var the tests expect.
+- Do not print secrets in logs — ensure no step echoes env vars containing them.
+
+### 4. Allure reporting
+- Both jobs generate Allure raw results (`allure-results/`).
+- A separate `report` job (runs after both test jobs, using `needs:`) merges results from
+  both jobs into one combined Allure report.
+- Publish the report as a build artifact (`actions/upload-artifact`) so it's downloadable
+  from the workflow run.
+- Optionally (flag as an option, don't implement unless asked): publish to GitHub Pages for
+  a persistent, browsable report link instead of a downloadable zip.
+
+### 5. Failure handling & visibility
+- If tests fail, the job should still upload the Allure report (use `if: always()` on the
+  report/upload steps) so failures are debuggable, not just a red X with no detail.
+- Add a clear job summary (GitHub Actions job summary) showing pass/fail counts per suite.
+
+### 6. Caching (performance)
+- Cache `node_modules` (or use `npm ci` with built-in caching via `actions/setup-node`'s
+  cache option) to avoid reinstalling dependencies on every run.
+- Cache Playwright browser binaries where possible to speed up repeated runs.
+
+### 7. File to create
+- `.github/workflows/playwright-ci.yml`
+
+## Constraints
+- Do not modify existing test logic, `playwright.config.ts` structure, or folder layout —
+  only add the CI/CD workflow file and any minimal config needed for CI (e.g. environment
+  variable references).
+- Do not commit real secrets or example `.env` values with real keys into the repo.
+- Keep the workflow readable — comment each job/step briefly so it's maintainable by
+  someone other than the original author.
+
+## Report back
+- Full contents of `.github/workflows/playwright-ci.yml`
+- Confirmation of which GitHub Secret name(s) need to be added manually (since the agent
+  cannot create secrets itself — that's a manual step for the user in GitHub repo settings)
+- Name of the file saved under `prompts/` for this task

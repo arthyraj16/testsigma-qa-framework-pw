@@ -1,0 +1,117 @@
+/**
+ * Elements API Test Suite
+ * Endpoints: GET/POST/PUT/DELETE /elements, /elements/{id}
+ * Base URL: https://app.testsigma.com/api/v1/
+ */
+
+import { test, expect } from '@playwright/test';
+import { ElementsClient } from '../clients/elements.client';
+
+test.describe('@api @regression Elements CRUD API', () => {
+  let client: ElementsClient;
+
+  test.beforeEach(async ({ request }) => {
+    client = new ElementsClient(request);
+  });
+
+  test('should retrieve list of elements with valid status and schema', async () => {
+    const result = await client.list();
+
+    expect(result.status).toBe(200);
+    expect(result.data).toBeDefined();
+    expect(Array.isArray(result.data)).toBe(true);
+
+    if (result.data.length > 0) {
+      const element = result.data[0];
+      expect(element).toHaveProperty('id');
+      expect(element).toHaveProperty('name');
+    }
+  });
+
+  test('should create a new element and verify with GET', async () => {
+    const elementName = `elem-test-${Date.now()}`;
+    const payload = {
+      name: elementName,
+      elementType: 'button',
+      locator: 'id=submit-btn',
+      description: 'Test element for automation',
+    };
+
+    const createResult = await client.create(payload);
+    expect(createResult.status).toBe(201);
+    expect(createResult.data).toBeDefined();
+    expect(createResult.data.id).toBeDefined();
+
+    const elementId = createResult.data.id;
+
+    const getResult = await client.get(elementId);
+    expect(getResult.status).toBe(200);
+    expect(getResult.data.name).toBe(elementName);
+
+    await client.delete(elementId);
+  });
+
+  test('should update an element and verify changes persist', async () => {
+    const elementName = `elem-update-${Date.now()}`;
+    const createPayload = {
+      name: elementName,
+      elementType: 'input',
+      locator: 'id=username',
+    };
+
+    const createResult = await client.create(createPayload);
+    const elementId = createResult.data.id;
+
+    const updateResult = await client.update(elementId, {
+      locator: 'id=email-field',
+      description: 'Updated element',
+    });
+    expect(updateResult.status).toBe(200);
+
+    const getResult = await client.get(elementId);
+    expect(getResult.status).toBe(200);
+    expect(getResult.data.locator).toBe('id=email-field');
+
+    await client.delete(elementId);
+  });
+
+  test('should delete an element and verify it returns 404', async () => {
+    const payload = {
+      name: `elem-delete-${Date.now()}`,
+      elementType: 'link',
+      locator: 'xpath=//a[@id="logout"]',
+    };
+
+    const createResult = await client.create(payload);
+    const elementId = createResult.data.id;
+
+    const getBeforeDelete = await client.get(elementId);
+    expect(getBeforeDelete.status).toBe(200);
+
+    const deleteResult = await client.delete(elementId);
+    expect([200, 204]).toContain(deleteResult.status);
+
+    const getAfterDelete = await client.get(elementId);
+    expect(getAfterDelete.status).toBe(404);
+  });
+
+  test('should return 400 when creating element with missing required fields', async () => {
+    const invalidPayload = { elementType: 'button' };
+    const result = await client.create(invalidPayload as any);
+    expect(result.status).toBe(400);
+  });
+
+  test('should return 401 when Authorization header is missing', async ({
+    request,
+  }) => {
+    const response = await request.get(
+      'https://app.testsigma.com/api/v1/elements'
+    );
+    expect(response.status()).toBe(401);
+  });
+
+  test('should return 404 when getting non-existent element', async () => {
+    const result = await client.get('999999999');
+    expect(result.status).toBe(404);
+  });
+});

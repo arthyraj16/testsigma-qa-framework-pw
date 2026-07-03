@@ -1,0 +1,15 @@
+[     337ms] [WARNING] Failed to decode downloaded font: https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap @ https://id.testsigma.com/ui/login:0
+[     337ms] [WARNING] OTS parsing error: invalid sfntVersion: 791289955 @ https://id.testsigma.com/ui/login:0
+[     378ms] [WARNING] Failed to decode downloaded font: https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap @ https://id.testsigma.com/ui/login:0
+[     378ms] [WARNING] OTS parsing error: invalid sfntVersion: 791289955 @ https://id.testsigma.com/ui/login:0
+[     433ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://id.testsigma.com/ui/login:0
+[     512ms] [WARNING] Failed to decode downloaded font: https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap @ https://id.testsigma.com/ui/login:0
+[     512ms] [WARNING] OTS parsing error: invalid sfntVersion: 791289955 @ https://id.testsigma.com/ui/login:0
+[  428209ms] [WARNING] Failed to decode downloaded font: https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap @ https://id.testsigma.com/ui/login:0
+[  428209ms] [WARNING] OTS parsing error: invalid sfntVersion: 791289955 @ https://id.testsigma.com/ui/login:0
+[  428237ms] [WARNING] Failed to decode downloaded font: https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap @ https://id.testsigma.com/ui/login:0
+[  428237ms] [WARNING] OTS parsing error: invalid sfntVersion: 791289955 @ https://id.testsigma.com/ui/login:0
+[  428286ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://id.testsigma.com/ui/login:0
+[  428298ms] [WARNING] Failed to decode downloaded font: https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap @ https://id.testsigma.com/ui/login:0
+[  428298ms] [WARNING] OTS parsing error: invalid sfntVersion: 791289955 @ https://id.testsigma.com/ui/login:0
+[  430659ms] [ERROR] Failed to load resource: the server responded with a status of 401 () @ https://id.testsigma.com/login:0

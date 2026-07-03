@@ -1,0 +1,8 @@
+[    2575ms] [LOG]  @ https://static-id.testsigma.com/vite/ui/production/f08d373/assets/index-CPl8SiBt.js:48
+[    2701ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://id.testsigma.com/ui/login?redirectTo=https://app.testsigma.com/ui/:0
+[    2750ms] [WARNING] Failed to decode downloaded font: https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap @ https://id.testsigma.com/ui/login?redirectTo=https://app.testsigma.com/ui/:0
+[    2750ms] [WARNING] OTS parsing error: invalid sfntVersion: 791289955 @ https://id.testsigma.com/ui/login?redirectTo=https://app.testsigma.com/ui/:0
+[    2751ms] [WARNING] Failed to decode downloaded font: https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap @ https://id.testsigma.com/ui/login?redirectTo=https://app.testsigma.com/ui/:0
+[    2751ms] [WARNING] OTS parsing error: invalid sfntVersion: 791289955 @ https://id.testsigma.com/ui/login?redirectTo=https://app.testsigma.com/ui/:0
+[    2751ms] [WARNING] Failed to decode downloaded font: https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap @ https://id.testsigma.com/ui/login?redirectTo=https://app.testsigma.com/ui/:0
+[    2751ms] [WARNING] OTS parsing error: invalid sfntVersion: 791289955 @ https://id.testsigma.com/ui/login?redirectTo=https://app.testsigma.com/ui/:0

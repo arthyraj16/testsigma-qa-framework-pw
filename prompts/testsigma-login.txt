@@ -1,0 +1,37 @@
+Use the attached @file:LoginWebContext.txt 
+
+Explore the Testsigma login page at https://id.testsigma.com/ui/login and generate the login test suite.
+
+## Setup
+- Install dotenv; load it in playwright.config.ts
+- Credentials via process.env.TS_EMAIL and process.env.TS_PASSWORD
+- Create .env.example (placeholder keys only) and add .env to .gitignore
+- Store negative test data in testdata/login-data.json — not inline in specs
+- In playwright.config.ts set: retries: process.env.CI ? 2 : 0, trace: 'on-first-retry', screenshot: 'only-on-failure'
+
+## Page Objects for this feature
+- pages/BasePage.ts — common actions (navigate, click, fill, waitForVisible, getErrorText)
+- pages/LoginPage.ts — extends BasePage:
+  - loginWithEmail(email, password)
+  - clickForgotPassword()
+  - getValidationError()
+  - togglePasswordVisibility()
+- Add DashboardPage only when the valid-login flow reaches it
+
+## Auth state reuse
+- Create auth.setup.ts that logs in once and saves storageState to .auth/user.json
+- Add .auth/ to .gitignore
+- Non-login test projects reuse this state; login tests always start with a clean context
+
+## Test cases (tests/login.spec.ts)
+1. Valid login → redirect to dashboard
+2. Invalid password → error message shown
+3. Unregistered email → error message shown
+4. Empty email → required-field validation
+5. Empty password → required-field validation
+6. Invalid email format → format validation
+7. Leading/trailing spaces in email → handled correctly
+8. Forgot-password link → navigates to reset page
+9. Password masking → input hidden; eye icon toggles visibility
+10. Direct dashboard URL without login → redirects to login page
+11. Tag tests: @smoke on tests 1 and 2; @regression on all

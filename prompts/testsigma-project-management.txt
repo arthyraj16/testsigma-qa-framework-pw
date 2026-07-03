@@ -1,0 +1,68 @@
+Generate comprehensive Playwright TypeScript test suite for "4 Testsigma project management scenarios" via live browser exploration.
+
+## Critical Workflow Rule
+DO NOT generate test code based on the scenario alone. Use Playwright to open the browser and interact with the site to explore the UI first.
+
+## Scenario 1: Create a new Project with Application checkbox behavior (9 tests)
+- Test: Add Application button NOT visible without checkbox
+- Test: Add Application button VISIBLE after checking checkbox
+- Test: Display valid Application Type options
+- Test: Validate Application Type dropdown has placeholder when no selection
+- Test: Show validation error when Create is attempted without Application Type
+- Test: Correctly populate Application Type after selection
+- Test: Show Version field after checking Allow multiple versions
+- Test: Require Version field when Allow multiple versions is checked
+- Test: Successfully create project with all required fields
+
+## Scenario 2: Edit Project Settings - Add all Application Types (7 tests)
+- Test: Open Edit Project dialog with all sections
+- Test: Successfully add Web Application Type
+- Test: Successfully add Mobile web Application Type
+- Test: Successfully add Android Application Type
+- Test: Successfully add iOS Application Type
+- Test: Add new Version for existing Application
+- Test: Persist all added applications after save
+
+## Scenario 3: Switch between Project / Application / Version (5 tests)
+- Test: Successfully switch Projects from dropdown
+- Test: Successfully switch Applications from dropdown
+- Test: Successfully switch Versions from dropdown
+- Test: Navigate to selected Project after Go to project click
+- Test: Maintain selected Project/App/Version after navigation
+
+## Scenario 4: Delete a Project (5 tests)
+- Test: Successfully delete project
+- Test: Show delete confirmation dialog
+- Test: Require typing DELETE to confirm deletion
+- Test: Remove all associated Applications and Versions after project deletion
+- Test: Handle edge cases and error states
+
+## Code Quality Requirements
+- Follow Page Object Model: page classes under /pages; specs use only page object methods
+- Prefer getByRole/getByLabel locators; avoid brittle CSS/XPath
+- Web-first assertions only (await expect(...).toBeVisible()); no hard waits or sleeps
+- One assertion focus per test; tests must be fully independent
+- Credentials only via environment variables (process.env.*)
+- Use auth state from .auth/user.json for authenticated dashboard access
+- Store test data in testdata/ folder, not inline in specs
+
+## Page Objects Required
+- pages/ProjectPage.ts - Project management interactions
+- pages/DashboardPage.ts - Dashboard navigation and validation
+- pages/BasePage.ts - Common base methods
+
+## Test File Structure
+- File: tests/project-management.spec.ts
+- Organization: 4 describe blocks (one per scenario)
+- Tags: @smoke on critical tests, @project on all tests
+- Before Each: Navigate to authenticated dashboard via baseURL
+
+## Authentication & Environment
+- baseURL: https://id.testsigma.com
+- Credentials: TS_EMAIL and TS_PASSWORD from process.env
+- Auth state: Stored in .auth/user.json
+- Setup dependency: auth.setup.spec.ts runs first, creates auth state
+- Test projects depend on setup project
+
+## Total Test Count
+26 tests across 4 scenarios × 3 browsers (Chromium, Firefox, WebKit) = 78 tests

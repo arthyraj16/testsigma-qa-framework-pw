@@ -1,0 +1,53 @@
+## Role
+You are an experienced AI QA Architect. You specialize in designing scalable,
+maintainable test automation folder structures using Playwright with TypeScript.
+Every structural decision you make should anticipate future growth — more API
+endpoints, more web flows, possibly mobile or visual testing later — without
+requiring another disruptive restructure.
+
+## Task: Restructure project folder layout to be scalable for Web + API testing
+
+Goal: Reorganize the existing web tests into a `tests/web/` subfolder, and create
+a `tests/api/` subfolder (with a scalable internal structure) ready for future API
+specs. This is a structural move only — do NOT change any test logic, assertions,
+or POM code.
+
+### Target structure
+```
+tests/
+├── web/
+│   ├── auth.setup.spec.ts
+│   ├── login.spec.ts
+│   ├── project-management.spec.ts
+│   ├── AI/
+│   └── TrialCheck/
+├── api/
+│   ├── clients/          → one client module per resource (future: environments.client.ts, elements.client.ts, etc.)
+│   ├── specs/            → one spec file per resource (future: environments.spec.ts, etc.)
+│   └── .gitkeep
+```
+
+### Steps
+1. Create `tests/web/` and `tests/api/` (with `clients/` and `specs/` subfolders inside `tests/api/`).
+2. Move existing web spec files/folders into `tests/web/`:
+   - auth.setup.spec.ts, login.spec.ts, project-management.spec.ts, AI/, TrialCheck/
+3. Leave `tests/api/clients/` and `tests/api/specs/` empty for now — add a `.gitkeep` in each so they're tracked in git.
+4. Update `playwright.config.ts`:
+   - Update `testDir`/`testMatch` paths to point to `tests/web/*.spec.ts`.
+   - Add a placeholder second `project` entry (commented out or minimal) for future API-only test runs, so extending it later is a one-line change, not a redesign.
+   - Do not change timeouts, reporters, or other unrelated config.
+5. Fix relative imports inside moved spec files (path depth changed by one level) — imports only, no logic changes.
+6. Update any spec-path references in `package.json` scripts.
+7. Run `npx playwright test tests/web` and confirm pass/fail counts match pre-restructure results exactly (93.5% login suite pass rate; project-management selector issues remain unchanged — do not fix them now).
+8. Do NOT modify `.env`, `.auth/`, `prompts/`, or `text context/` folders. Do NOT create any API spec files yet — only the empty scalable skeleton.
+
+## Prompt Tracking (standing rule)
+- If a `prompts` folder does not exist under the project root, create it once.
+- Before starting any new task, save the user's task-defining prompt verbatim as `prompts/<functionality-name>.txt` (derive a short, clear name, e.g., `project-restructure-for-api.txt`).
+- Never overwrite or modify existing files in the prompts folder — only add new files.
+- If a filename already exists for a new task, append a number suffix (e.g., `project-restructure-for-api-2.txt`) instead of overwriting.
+
+## Report back
+- Final folder tree under `tests/`.
+- Confirmation that test run results match pre-restructure results (same pass/fail counts).
+- Name of the file saved under `prompts/` for this task.

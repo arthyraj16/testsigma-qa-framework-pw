@@ -1,0 +1,44 @@
+- main [ref=f76e2]:
+  - main [ref=f76e3]:
+    - generic [ref=f76e4]:
+      - generic [ref=f76e5]:
+        - generic [ref=f76e6]: Smart Test automation for Agile Teams.
+        - generic [ref=f76e7]: Copyright © Testsigma Technologies Inc. All Rights Reserved.
+      - generic [ref=f76e8]:
+        - img "Testsigma logo" [ref=f76e9]
+        - heading "Sign in" [level=1] [ref=f76e10]
+        - generic [ref=f76e11]:
+          - generic [ref=f76e12]:
+            - generic [ref=f76e13]: Work email*
+            - textbox "name@company.com" [active] [ref=f76e15]
+          - generic [ref=f76e16]:
+            - generic [ref=f76e17]: Password*
+            - generic [ref=f76e18]:
+              - textbox "Enter Password" [ref=f76e19]
+              - img [ref=f76e22] [cursor=pointer]
+          - link "Forgot password?" [ref=f76e26] [cursor=pointer]:
+            - /url: /ui/forgot_password
+          - button "Sign in" [ref=f76e27] [cursor=pointer]
+        - generic [ref=f76e28]:
+          - paragraph [ref=f76e29]: OR
+          - generic [ref=f76e30]:
+            - link "Google" [ref=f76e31] [cursor=pointer]:
+              - /url: /oauth2/authorization/google?redirectTo=
+              - img [ref=f76e32]
+              - generic [ref=f76e33]: Google
+            - link "Azure Azure AD" [ref=f76e34] [cursor=pointer]:
+              - /url: /oauth2/authorization/azure?redirectTo=
+              - img "Azure" [ref=f76e35]
+              - generic [ref=f76e36]: Azure AD
+            - link "Github" [ref=f76e37] [cursor=pointer]:
+              - /url: /oauth2/authorization/github?redirectTo=
+              - img [ref=f76e38]
+              - generic [ref=f76e39]: Github
+          - link "SSO Sign in with SSO" [ref=f76e40] [cursor=pointer]:
+            - /url: /ui/sso_login
+            - img "SSO" [ref=f76e41]
+            - text: Sign in with SSO
+          - paragraph [ref=f76e42]:
+            - text: Don't have an account?
+            - link "Join Free Today" [ref=f76e43] [cursor=pointer]:
+              - /url: https://testsigma.com/signup
