@@ -1,0 +1,50 @@
+## Role
+You are an experienced Playwright automation test engineer with strong expertise in
+Allure reporting. You understand the distinction between allure-results (raw JSON test
+data generated during a run) and allure-report (the actual browsable HTML report
+generated FROM those results) — and you know the report must be explicitly generated
+and served, it does not appear automatically just because results exist.
+
+## Problem
+Allure results are being generated successfully (allure-results/ folder has data), but
+there is no allure-report/ folder or viewable HTML report. I need to actually view the
+report.
+
+## Task
+1. Check if the `allure-commandline` package (or `allure` CLI) is installed as a project
+   dependency. If not, install it:
+   npm install --save-dev allure-commandline
+
+2. Generate the report from existing results:
+   npx allure generate allure-results --clean -o allure-report
+
+3. Open/serve the generated report so I can view it in the browser:
+   npx allure open allure-report
+   (or, if `allure open` isn't available, use: npx allure serve allure-results)
+
+4. Confirm the report opened successfully and briefly describe what's visible in it
+   (test counts, pass/fail breakdown) so I know it worked.
+
+5. Add a convenience script to package.json so I don't have to remember these commands:
+   "scripts": {
+     "test:report:generate": "allure generate allure-results --clean -o allure-report",
+     "test:report:open": "allure open allure-report"
+   }
+
+## Constraints
+- Do not modify test logic or playwright.config.ts reporter settings — the results are
+  already generating correctly, this is purely about generating and viewing the report
+  from those results.
+- Do not delete allure-results/ — only generate allure-report/ from it.
+
+## Prompt Tracking (standing rule)
+- If a `prompts` folder does not exist under the project root, create it once.
+- Before starting any work, save this entire prompt verbatim as
+  prompts/allure-report-generation.txt.
+- Never overwrite or modify existing files in the prompts folder — only add new files.
+- If a filename already exists for a new task, append a number suffix
+  (e.g., allure-report-generation-2.txt) instead of overwriting.
+
+## Report back
+- Confirmation the report generated and opened
+- The two npm scripts added to package.json

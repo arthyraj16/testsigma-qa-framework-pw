@@ -6,6 +6,10 @@ node_modules/
 /playwright/.cache/
 /playwright/.auth/
 
+# Allure Reports
+/allure-results/
+/allure-report/
+
 # Local env and auth state
 .env
 .auth/

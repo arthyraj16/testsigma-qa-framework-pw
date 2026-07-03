@@ -81,14 +81,17 @@ testsigma-qa-framework-pw/
 ├── .auth/                                # Session storage (gitignored)
 │   └── user.json                         # Authenticated user session state
 │
-├── playwright-report/                    # Local test reports
-├── test-results/                         # Local test artifacts
+├── playwright-report/                    # Playwright HTML test reports (gitignored)
+├── test-results/                         # Local test artifacts (gitignored)
+├── allure-results/                       # Raw Allure test data (gitignored)
+├── allure-report/                        # Generated Allure HTML report (gitignored)
 │
 ├── playwright.config.ts                  # Playwright configuration
 ├── tsconfig.json                         # TypeScript configuration
 ├── package.json                          # Dependencies & project metadata
 ├── package-lock.json                     # Locked dependency versions
 │
+├── README.md                             # Main project documentation & Allure guide
 ├── .gitignore                            # Git ignore rules
 ├── .env.example                          # Environment variables template
 └── Framework strcuture reference.txt     # This file
@@ -257,8 +260,12 @@ package.json
 ✓ Dependencies:
   - @playwright/test: ^1.61.1
   - allure-playwright: ^3.10.2
+  - allure-commandline: ^2.43.0
   - dotenv: ^16.6.1
   - @types/node: ^26.1.0
+✓ Scripts:
+  - test:report:generate: Generate Allure report from results
+  - test:report:open: Open generated Allure report in browser
 
 tsconfig.json
 ─────────────
@@ -273,8 +280,10 @@ tsconfig.json
 ✓ node_modules/
 ✓ .env (credentials never committed)
 ✓ .auth/ (session state not committed)
-✓ test-results/
-✓ playwright-report/
+✓ test-results/ (local test artifacts)
+✓ playwright-report/ (Playwright HTML reports)
+✓ allure-results/ (raw Allure test data)
+✓ allure-report/ (generated Allure HTML report)
 ✓ .playwright-mcp/
 ✓ .vscode/mcp.json
 ✓ test-results.json
@@ -400,11 +409,14 @@ Changes saved → git add → git commit → git push → GitHub repo → GitHub
 
 REPORT GENERATION:
 
-Local Development:
-$ npm install -g allure-commandline
-$ npx playwright test
-$ npx allure generate allure-results -o allure-report --clean
-$ npx allure open allure-report
+Local Development (Simplified):
+$ npm run test:report:generate    # Generate report from allure-results/
+$ npm run test:report:open        # Open in browser (or: npx allure serve allure-results)
+
+Or generate and run tests:
+$ npx playwright test             # Runs tests and updates allure-results/
+$ npm run test:report:generate    # Generate HTML report
+$ npm run test:report:open        # View report
 
 CI/CD Pipeline:
 ✓ Automatic report generation after test runs
@@ -419,6 +431,11 @@ REPORT CONTENTS:
 ✓ Screenshots & videos on failure
 ✓ Test history trends
 ✓ Browser coverage (Chromium, Firefox, WebKit)
+✓ Playwright trace viewer integration
+
+FOLDER STRUCTURE:
+✓ allure-results/   - Raw JSON test data (generated during test run, excluded from git)
+✓ allure-report/    - Generated HTML report (excluded from git, regenerated with npm script)
 
 
 ================================================================================
@@ -525,16 +542,21 @@ SETUP STEPS:
 1. Clone repository
 2. npm ci (install dependencies)
 3. Create .env file with TS_EMAIL and TS_PASSWORD
-4. npm install -g allure-commandline (optional, for local reports)
+4. (allure-commandline is already a dev dependency)
 
 RUN TESTS:
 $ npx playwright test --project=api    # Quick API test
 $ npx playwright test                  # Full suite
 
 VIEW RESULTS:
-✓ Local HTML report:  npx playwright show-trace <path>
-✓ Allure report:      npx allure open allure-report/
-✓ GitHub Artifacts:   Workflow run → Artifacts
+✓ Allure report:      npm run test:report:generate && npm run test:report:open
+✓ Playwright report:  npx playwright show-report
+✓ GitHub Artifacts:   Workflow run → Artifacts → download allure-report
+
+DOCUMENTATION:
+✓ Main guide:          README.md (includes Allure setup & usage)
+✓ Framework structure: Framework strcuture reference.txt (this file)
+✓ Task prompts:        prompts/ folder (see prompts/allure-report-generation.txt)
 
 DEPLOYMENT CYCLE:
 Code → Commit → Push → GitHub Actions → Tests → Allure Report → Artifacts
@@ -544,27 +566,45 @@ Code → Commit → Push → GitHub Actions → Tests → Allure Report → Arti
 FRAMEWORK VERSION INFO
 ================================================================================
 
-Last Updated: 2026-07-04
+Last Updated: 2026-07-04 (Allure Report Setup & Documentation)
 Initial Commit: 2700ea7
 Latest Fix: 52c4f01 (API test expectations adjusted)
 Repository: https://github.com/arthyraj16/testsigma-qa-framework-pw
 
 Key Components:
 ✓ Playwright: ^1.61.1
-✓ Allure: ^3.10.2
+✓ Allure Playwright: ^3.10.2
+✓ Allure Commandline: ^2.43.0
 ✓ TypeScript: Strict mode
 ✓ Node: 18+ recommended
+
+Documentation:
+✓ README.md: Main project guide with Allure setup
+✓ Framework strcuture reference.txt: Comprehensive reference (this file)
+✓ prompts/allure-report-generation.txt: Allure setup documentation
 
 Status: PRODUCTION-READY
 └─ All 21 API tests passing
 └─ Web tests fully configured
 └─ CI/CD pipeline active
-└─ Allure reporting enabled
+└─ Allure reporting fully integrated (local + CI)
+└─ NPM convenience scripts configured
 
 
 ================================================================================
 END OF FRAMEWORK STRUCTURE REFERENCE
 ================================================================================
+
+IMPORTANT FILES:
+- README.md                          # Start here: Comprehensive guide & Allure setup
+- Framework strcuture reference.txt  # This file: Detailed technical reference
+- prompts/allure-report-generation.txt # Allure report generation guide
+
+Quick Start:
+1. npm ci && npx playwright install --with-deps
+2. Create .env with TS_EMAIL, TS_PASSWORD
+3. npx playwright test
+4. npm run test:report:generate && npm run test:report:open
 
 For detailed prompts and task documentation, see: prompts/
 For testing guidelines, see: playwright.config.ts
