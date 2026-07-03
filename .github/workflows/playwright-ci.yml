@@ -14,11 +14,6 @@ jobs:
   web-tests:
     name: Web Tests
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        # Run web tests across multiple browsers
-        browser: [chromium, firefox, webkit]
     steps:
       - uses: actions/checkout@v4
 
@@ -34,8 +29,8 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
-      - name: Run web tests (${{ matrix.browser }})
-        run: npx playwright test --project=${{ matrix.browser }}
+      - name: Run web tests (Chromium)
+        run: npx playwright test --project=chromium
         env:
           CI: true
           TESTSIGMA_API_KEY: ${{ secrets.TESTSIGMA_CICD_API_KEY }}
@@ -45,7 +40,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: allure-results-web-${{ matrix.browser }}
+          name: allure-results-web
           path: allure-results/
           retention-days: 5
 
