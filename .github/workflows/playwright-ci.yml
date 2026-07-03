@@ -34,6 +34,8 @@ jobs:
         env:
           CI: true
           TESTSIGMA_API_KEY: ${{ secrets.TESTSIGMA_CICD_API_KEY }}
+          TS_EMAIL: ${{ secrets.TS_EMAIL }}
+          TS_PASSWORD: ${{ secrets.TS_PASSWORD }}
 
       # Upload Allure raw results for later merging
       - name: Upload Allure results
